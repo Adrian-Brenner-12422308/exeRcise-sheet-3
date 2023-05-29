@@ -197,14 +197,86 @@ column_means \<- lapply(tax_data\[, -1\], 2, mean)
 
 column_means
 
+- ChatGPT answer:
+
+The correct apply function to use in this case is `sapply` instead of `lapply`. The `lapply` function applies a given function to each element of a list or data frame, but in this case, we want to apply the `mean` function to each column of the data frame.
+
+Here's the corrected code:
+
+```{r}
+tax_data <- data.frame(
+  Name = c("Munich GmbH", "ABC Inc.", "Backpacks 1980", "Bavarian Circus"),
+  Tax_2019 = c(5000, 4000, 6000, 3500),
+  Tax_2020 = c(4800, 4200, 5800, 3700),
+  Tax_2021 = c(5200, 3800, 5900, 3400)
+)
+
+# Calculate column-wise means
+column_means <- sapply(tax_data[, -1], mean)
+
+# Calculate row-wise means
+row_means <- rowMeans(tax_data[, -1])
+
+column_means
+row_means
+```
+
+In the corrected code, `sapply` is used to apply the `mean` function to each column of `tax_data[, -1]`, excluding the first column (Name). The result is a vector of column means stored in `column_means`.
+
+To calculate row-wise means, the `rowMeans` function is used on `tax_data[, -1]`, excluding the first column. The result is a vector of row means stored in `row_means`.
+
 b)  Using ChatGPT try to understand what the rapply() function does.
     Create an easy example with mock data where the function is used and
     explain it in your words.
+    
+The `rapply()` function in R is used to recursively apply a function to elements of a list or nested structure. It is particularly useful when dealing with hierarchical or nested data structures.
+
+Here's an example to demonstrate how `rapply()` works:
+
+```{r}
+# Create a nested list
+my_list <- list(
+  a = 1,
+  b = list(
+    c = 2,
+    d = list(
+      e = 3,
+      f = 4
+    )
+  )
+)
+
+# Define a function to square the numeric values
+square <- function(x) {
+  if (is.numeric(x)) {
+    return(x^2)
+  } else {
+    return(x)
+  }
+}
+
+# Apply the square function recursively to all numeric values in the list
+result <- rapply(my_list, f = square, how = "replace")
+
+result
+```
+
+In this example, we have a nested list called `my_list` with numeric and non-numeric values. We want to square all the numeric values in the list.
+
+We define a custom function `square()` that checks if the input value is numeric. If it is, the function squares the value; otherwise, it returns the value as it is.
+
+Using `rapply()`, we apply the `square()` function recursively to all numeric values in `my_list`. The `how = "replace"` argument indicates that the function should replace the original values with the transformed values.
+
+The result of `rapply()` is a new list with the same structure as the original `my_list`, but with the numeric values squared.
+
+By applying the `square()` function recursively, `rapply()` traverses the nested structure of the list and applies the function to all appropriate elements, allowing us to perform a desired operation on specific elements within a complex data structure.
+    
+
 
 ## Final Note
 
 Make sure to push all your commits and changes to GitHub before
-submittining the exercise sheet.
+submitting the exercise sheet.
 
 
 Adrian Brenner MN: 12 422 308 -- 01.06.23
