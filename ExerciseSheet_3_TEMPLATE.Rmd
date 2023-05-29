@@ -132,8 +132,20 @@ total_babies_22 <- sum(ifelse(grepl("4 oder weniger", Vornamen_22$Anzahl), 4, as
 
 d)  Add a new column `year` to both datasets which holds the correct
     year for each.
+    
+```{r}
+Vornamen_21$year <- 2021
+Vornamen_22$year <- 2022
+```
 
 e)  Combine both datasets into one using `bind_rows()`.
+
+```{r}
+library(dplyr)
+
+Vornamen_2021_2022 <- bind_rows(Vornamen_21, Vornamen_22)
+
+```
 
 f)  Combine the counts for same names to determine the most popular
     names across both years. Print out the top 10 names in a nicely
