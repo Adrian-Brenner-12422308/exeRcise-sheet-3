@@ -150,6 +150,30 @@ Vornamen_2021_2022 <- bind_rows(Vornamen_21, Vornamen_22)
 f)  Combine the counts for same names to determine the most popular
     names across both years. Print out the top 10 names in a nicely
     formatted table for both years. Include a table caption.
+    
+```{r}
+library(knitr)
+library(dplyr)
+
+26620+25199
+
+Vornamen_2021_2022 <- bind_rows(Vornamen_21, Vornamen_22)
+
+library(dplyr)
+library(knitr)
+
+combined_dataset <- bind_rows(Vornamen_21, Vornamen_22)
+
+popular_names <- Vornamen_2021_2022 %>%
+  group_by(Vorname) %>%
+  summarize(total_count = sum(ifelse(Anzahl == "4 oder weniger", 0, as.numeric(Anzahl)))) %>%
+  top_n(10, wt = total_count) %>%
+  arrange(desc(total_count))
+
+
+knitr::kable(popular_names, caption = "Top 10 Most Popular Names (2021-2022)")
+
+```
 
 ## Exercise 4: Chat GPT + apply (3 points)
 
