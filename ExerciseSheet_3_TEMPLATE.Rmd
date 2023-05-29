@@ -1,8 +1,12 @@
 ---
-title: "Exercise #3"
-subtitle: "Fortgeschrittene Statistische Software für NF - SS 2022/23"
+title: 'Exercise #3'
 author: "Adrian Brenner (12422308)"
-date: "Date (01.06.2023)"
+date: "Date (29.05.2023)"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+subtitle: "Fortgeschrittene Statistische Software für NF - SS 2022/23"
 ---
 
 ## General Remarks
@@ -164,12 +168,12 @@ library(knitr)
 
 combined_dataset <- bind_rows(Vornamen_21, Vornamen_22)
 
-popular_names <- Vornamen_2021_2022 %>%
+popular_names <- suppressWarnings({ Vornamen_2021_2022 %>%
   group_by(Vorname) %>%
   summarize(total_count = sum(ifelse(Anzahl == "4 oder weniger", 0, as.numeric(Anzahl)))) %>%
   top_n(10, wt = total_count) %>%
   arrange(desc(total_count))
-
+})
 
 knitr::kable(popular_names, caption = "Top 10 Most Popular Names (2021-2022)")
 
@@ -279,4 +283,5 @@ Make sure to push all your commits and changes to GitHub before
 submitting the exercise sheet.
 
 
-Adrian Brenner MN: 12 422 308 -- 01.06.23
+Adrian Brenner MN: 12 422 308 -- 29.05.23
+
