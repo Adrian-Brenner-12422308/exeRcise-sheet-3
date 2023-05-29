@@ -84,8 +84,12 @@ b)  Push your code to this new repository by copying and executing the
     snippet on github listed under
     `…or push an existing repository from the command line`.
     
+- Okay!
+    
 c)  Regularly push your latest changes to GitHub again and especially do
     so when you are finished with this sheet.
+    
+- Okay, will do!
 
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
